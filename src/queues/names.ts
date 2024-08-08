@@ -1,0 +1,5 @@
+export enum QueueNames {
+    GENERATE_PODCAST = 'GENERATE_PODCAST',
+    DELETE_PODCAST = 'DELETE_PODCAST',
+    SEND_EMAIL = 'SEND_EMAIL'
+}

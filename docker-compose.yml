@@ -1,0 +1,43 @@
+version: '3.8'
+networks:
+  ai-podcast-server:
+    driver: bridge
+
+services:
+  ai-podcast-server:
+    build:
+      context: .
+      target: build-stage
+    environment:
+      TEST_DATABASE_URL: mongodb://mongo:27017/ai-podcast-server-test
+      DATABASE_URL: mongodb://mongo:27017/ai-podcast-server
+      PORT: 5509
+      HOST: localhost:5509
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - redis
+      - mongo
+    networks:
+      - ai-podcast-server
+    ports:
+      - '5509:5509'
+
+  redis:
+    image: redis
+    container_name: redis
+    volumes:
+      - ./data:/data
+    ports:
+      - '6380:6379'
+    networks:
+      - ai-podcast-server
+  
+  mongo:
+    image: mongo
+    container_name: mongo
+    volumes:
+      - ./data:/data
+    ports:
+      - 27018:27017
+    networks:
+      - ai-podcast-server
