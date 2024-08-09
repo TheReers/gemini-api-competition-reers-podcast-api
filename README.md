@@ -1,4 +1,4 @@
-# ReersTech LMS API
+# Reers Podcast API For the Gemini API Challenge
 
 Steps to run this project locally:
 
